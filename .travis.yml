@@ -1,0 +1,10 @@
+language: node
+before_script:
+- npm ci
+deploy:
+  provider: heroku
+  api_key:
+    secure: iqdc70BnIBg7pkqfdtpMn/rRxQS8l4aFgJi5xS1WMSjXZbexo+JVJuU1rzJd58h9dS0H5HUX40jCPvlMW/rMwTsMWa6F0/a5YXeOnWO01lAj01eWBW2UZyStrQY2P5mBDJCjtZpw87b3SVaenriMD2mz31CLQ/XJgo1FvtSyglsWVpOWPjFfJEeosYacFv4E36/3rx1DzeWiBKo7petZ1FREG0PoYN6LGWNVZivbk4y+8lAeDRctlawoUSlXiN+W3N9BNDJtGkwHZuVoWMeWwLl2ishKhSuzcLv5RaFGXgV8HsoS/0Bd1pmjGN0A22YotgVtOMHdfYX55+Gb19cWhyY4a0e8JLhsMVHipcy6nXlK+Dky2689ORHbvFPVA9kiQssFjpugeLRac49TQHyZRclQMDPcZyH77Kk+rKipEydsKmW6q9LLjmxOArc7+GdSvmQIZ0MlCk9pVXAon+wDN9wFTZZG1B2nMggK1Pnr1+KeYYWubj7ZMGqPB4KAQRD9KYNP/84CleCdZEy+j1XX1O/IDZRd4Uslj6pjQWX5/xImKKVFj07vJO7D5ezHvdaEeV2KhcwcBZCqus+Jy7EKPQcpPvIfynZNFiGy4vfCS2jom56uBTkoEHLb4SVqj+blHXWjWw0MvJbLZOfrYeuRoAfLDuXehEqk3PggHHKb96c=
+  app: scytale-server
+  on:
+    repo: cpapazaf/scytale-server
