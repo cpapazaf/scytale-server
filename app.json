@@ -1,0 +1,7 @@
+{
+    "name": "Scytale Server",
+    "description": "A socket.io server for the scytale app",
+    "repository": "https://github.com/cpapazaf/scytale-server",
+    "logo": "https://github.com/cpapazaf/scytale-desktop-app/blob/master/assets/icon.png",
+    "keywords": ["node", "express", "socket.io"]
+  }
