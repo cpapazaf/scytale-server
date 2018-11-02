@@ -1,37 +1,38 @@
 var http = require('http');
-var express = require('express');
-var app = express();
-var server = http.Server(app);
+var server = http.createServer();
 var io = require('socket.io')(server);
 
-function connectionHandler (socket, io) {
+const logger = (...message) => {
+  process.env.DEBUG && console.log(...message);
+}
+
+const connectionHandler = (socket, io) => {
+
+  const getUsers = (roomName) => {
+    return Object.keys(io.sockets.adapter.rooms[roomName].sockets).map((id) => { return {id} })
+  }
 
   socket.on('signal', payload => {
-    console.log('signal: %s, payload: %o', socket.id, payload);
+    logger('signal: %s, payload: %o', socket.id, payload);
     io.to(payload.userId).emit('signal', {
       userId: socket.id,
       signal: payload.signal
     })
   })
 
-  socket.on('ready', roomName => {
-    // console.log('ready: %s, room: %s', socket.id, roomName)
+  socket.on('ready', (roomName) => {
     if (socket.room) socket.leave(socket.room)
     socket.room = roomName
     socket.join(roomName)
     socket.room = roomName
 
     let users = getUsers(roomName)
-    // console.log('ready: %s, room: %s, users: %o', socket.id, roomName, users)
+    logger('ready: %s, room: %s, users: %o', socket.id, roomName, users)
     io.to(roomName).emit('users', {
       initiator: socket.id,
       users
     })
   })
-
-  function getUsers (roomName) {
-    return Object.keys(io.sockets.adapter.rooms[roomName].sockets).map((id) => { return {id} })
-  }
 }
 
 io.on('connection', socket => connectionHandler(socket, io));
