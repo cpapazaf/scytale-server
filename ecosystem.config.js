@@ -11,11 +11,16 @@ module.exports = {
     watch: false,
     max_memory_restart: '1G',
     env: {
-      NODE_ENV: 'development',
-      DEBUG: true
+      NODE_ENV: 'production',
+      DEBUG: false
     },
     env_production: {
-      NODE_ENV: 'production'
+      NODE_ENV: 'production',
+      DEBUG: false
+    },
+    env_development: {
+      NODE_ENV: 'development',
+      DEBUG: true
     }
   }],
 };
