@@ -6,6 +6,12 @@ The purpose of this server is to be as simple as posible and reveal as less info
 
 The clients can exchange any information they need over the secure p2p connections they have establisthed!
 
+## Deploy your own private server on Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cpapazaf/scytale-server/tree/master)
+
+For more configurations on Heroku check : `https://devcenter.heroku.com/articles/node-websockets`
+
 ## Security
 
 I'm not expert in Security but I will try to use common sense :)
@@ -17,9 +23,3 @@ Here are the steps I have followed:
 * Eliminate CORS through `socket.io#origins`
 * Check the server at `https://securityheaders.com`
 * Use `rejectUnauthorized: true` to avoid MITM attacks
-
-## Deploy your own private server on Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cpapazaf/scytale-server/tree/master)
-
-For more configurations on Heroku check : `https://devcenter.heroku.com/articles/node-websockets`
