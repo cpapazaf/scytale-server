@@ -18,8 +18,10 @@ Here are the steps I have followed:
 * Check the server at `https://securityheaders.com`
 * Use `rejectUnauthorized: true` to avoid MITM attacks
 
+The first user who joins a random chatroom is also the `Initiator` of the chatroom and needs to set a password for that room. Everyome else who wants to join the room needs to know the password. This way we make sure that we provide a first security check by randomizing the chatroom and a second one by authenticating with it.
+
 ## Deploy your own private server on Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cpapazaf/scytale-server/tree/master)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cpapazaf/scytale-server/tree/master&env[HEROKUAPP_DOMAIN]=scytale-server)
 
 For more configurations on Heroku check : `https://devcenter.heroku.com/articles/node-websockets`

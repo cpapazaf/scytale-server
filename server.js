@@ -1,10 +1,13 @@
-var http = require('http');
-var server = http.createServer();
-var io = require('socket.io')(server);
+var http = require('http')
+var server = http.createServer()
+var io = require('socket.io')(server)
+var crypto = require('crypto')
 
 const logger = (...message) => {
-  process.env.DEBUG && console.log(...message);
+  process.env.DEBUG && console.log(...message)
 }
+
+// const chatRoomAuth = {}
 
 const connectionHandler = (socket, io) => {
 
@@ -20,8 +23,18 @@ const connectionHandler = (socket, io) => {
     })
   })
 
-  socket.on('ready', (roomName) => {
+  socket.on('ready', (roomName, password) => {
     if (socket.room) socket.leave(socket.room)
+    // if (chatRoomAuth[roomName] && chatRoomAuth[roomName].auth) {
+    //   if (chatRoomAuth[roomName].auth !== crypto.createHash('md5').update(password).digest("hex")) {
+    //     socket.emit('exception', { errorMessage: 'NOT_AUTHENTICATED' })
+    //     return
+    //   }
+    // } else {
+    //   chatRoomAuth[roomName] = {}
+    //   chatRoomAuth[roomName]['auth'] = crypto.createHash('md5').update(password).digest("hex")
+    // }
+    // logger('Cache: %s', JSON.stringify(chatRoomAuth))
     socket.room = roomName
     socket.join(roomName)
     socket.room = roomName
@@ -35,6 +48,8 @@ const connectionHandler = (socket, io) => {
   })
 }
 
-io.on('connection', socket => connectionHandler(socket, io));
+var herokuDomain = process.env.HEROKUAPP_DOMAIN || 'scytale-server'
+io.origins('http://localhost:*  https://'+ herokuDomain +'.herokuapp.com:*')
+io.on('connection', socket => connectionHandler(socket, io))
 
-server.listen(process.env.PORT || '4000');
+server.listen(process.env.PORT || '4000')
