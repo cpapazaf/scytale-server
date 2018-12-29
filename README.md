@@ -6,6 +6,12 @@ The purpose of this server is to be as simple as posible and reveal as less info
 
 The clients can exchange any information they need over the secure p2p connections they have establisthed!
 
+## Deploy your own private server on Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cpapazaf/scytale-server/tree/master&env[HEROKUAPP_DOMAIN]=scytale-server)
+
+For more configurations on Heroku check : `https://devcenter.heroku.com/articles/node-websockets`
+
 ## Security
 
 I'm not expert in Security but I will try to use common sense :)
@@ -19,9 +25,3 @@ Here are the steps I have followed:
 * Use `rejectUnauthorized: true` to avoid MITM attacks
 
 The first user who joins a random chatroom is also the `Initiator` of the chatroom and needs to set a password for that room. Everyome else who wants to join the room needs to know the password. This way we make sure that we provide a first security check by randomizing the chatroom and a second one by authenticating with it.
-
-## Deploy your own private server on Heroku
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/cpapazaf/scytale-server/tree/master&env[HEROKUAPP_DOMAIN]=scytale-server)
-
-For more configurations on Heroku check : `https://devcenter.heroku.com/articles/node-websockets`
