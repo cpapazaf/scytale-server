@@ -1,13 +1,15 @@
-var http = require('http')
-var server = http.createServer()
-var io = require('socket.io')(server)
-var crypto = require('crypto')
+const http = require('http')
+const crypto = require('crypto')
 
 const logger = (...message) => {
   process.env.DEBUG && console.log(...message)
 }
 
 const chatRoomAuth = {}
+
+const handleRequest = (request, response) => {
+  response.end('Server working properly. Requested URL : ' + request.url);
+}
 
 const connectionHandler = (socket, io) => {
 
@@ -48,7 +50,9 @@ const connectionHandler = (socket, io) => {
   })
 }
 
-var herokuDomain = process.env.HEROKUAPP_DOMAIN || 'scytale-server'
+const herokuDomain = process.env.HEROKUAPP_DOMAIN || 'scytale-server'
+const server = http.createServer(handleRequest)
+const io = require('socket.io')(server)
 io.origins('http://localhost:*  https://'+ herokuDomain +'.herokuapp.com:*')
 io.on('connection', socket => connectionHandler(socket, io))
 
