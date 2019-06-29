@@ -11,8 +11,8 @@ const handleRequest = (request, response) => {
   const method = request.method.toLowerCase()
 
   if (method !== 'get') {
-    response.sendStatus(405)
-    return
+    response.writeHead(405)
+    response.end()
   }
 
   logger('Request: %s', request.url)
@@ -24,8 +24,8 @@ const handleRequest = (request, response) => {
       rooms: Object.keys(chatRoomAuth).length
     }))
   } else {
-    response.sendStatus(404)
-    return
+    response.writeHead(404)
+    response.end()
   }
 }
 
