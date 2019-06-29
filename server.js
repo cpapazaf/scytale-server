@@ -8,7 +8,25 @@ const logger = (...message) => {
 const chatRoomAuth = {}
 
 const handleRequest = (request, response) => {
-  response.end('Server working properly. Requested URL : ' + request.url);
+  const method = request.method.toLowerCase()
+
+  if (method !== 'get') {
+    response.sendStatus(405)
+    return
+  }
+
+  logger('Request: %s', request.url)
+
+  if (request.url === '/ping') {
+    response.end('pong')
+  } else if (request.url === '/status') {
+    response.end(JSON.stringify({
+      rooms: Object.keys(chatRoomAuth).length
+    }))
+  } else {
+    response.sendStatus(404)
+    return
+  }
 }
 
 const connectionHandler = (socket, io) => {
@@ -18,7 +36,7 @@ const connectionHandler = (socket, io) => {
   }
 
   socket.on('signal', payload => {
-    logger('signal: %s, payload: %o', socket.id, payload);
+    logger('signal: %s, payload: %o', socket.id, payload)
     io.to(payload.userId).emit('signal', {
       userId: socket.id,
       signal: payload.signal
